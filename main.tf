@@ -25,7 +25,7 @@ resource "aws_cloudwatch_metric_alarm" "default" {
 
   alarm_name                = var.alarm_name
   alarm_description         = var.alarm_description
-  comparison_operator       = var.comparison_operator
+  comparison_operator       = "GreaterThanOrEqualToThreshold"
   evaluation_periods        = var.evaluation_periods
   metric_name               = var.metric_name
   namespace                 = var.namespace
@@ -36,7 +36,8 @@ resource "aws_cloudwatch_metric_alarm" "default" {
   actions_enabled           = var.actions_enabled
   insufficient_data_actions = var.insufficient_data_actions
   ok_actions                = var.ok_actions
-  tags                      = module.labels.tags
+  tags = merge(
+    module.labels.tags,)
 
   dimensions = var.dimensions
 }
@@ -55,7 +56,9 @@ resource "aws_cloudwatch_metric_alarm" "expression" {
   actions_enabled           = var.actions_enabled
   insufficient_data_actions = var.insufficient_data_actions
   ok_actions                = var.ok_actions
-  tags                      = module.labels.tags
+  tags = merge(
+    module.labels.tags,)
+
   dynamic "metric_query" {
     for_each = var.query_expressions
     content {
@@ -99,7 +102,9 @@ resource "aws_cloudwatch_metric_alarm" "anomaly" {
   actions_enabled           = var.actions_enabled
   insufficient_data_actions = var.insufficient_data_actions
   ok_actions                = var.ok_actions
-  tags                      = module.labels.tags
+  tags = merge(
+    module.labels.tags,)
+
   dynamic "metric_query" {
     for_each = var.query_expressions
     content {

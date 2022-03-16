@@ -52,6 +52,7 @@ variable "expression_enabled" {
 
 variable "alarm_name" {
   type        = string
+  default     = 1
   description = "The descriptive name for the alarm."
 }
 
@@ -69,6 +70,7 @@ variable "comparison_operator" {
 
 variable "evaluation_periods" {
   type        = number
+  default     = 1
   description = "The number of periods over which data is compared to the specified threshold."
 }
 
